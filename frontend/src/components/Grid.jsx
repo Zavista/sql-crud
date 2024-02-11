@@ -42,7 +42,7 @@ export const Td = styled.td`
     }
 `;
 
-const Grid = () => {
+const Grid = ({ users }) => {
   return (
     <Table>
         <Thead>
@@ -53,7 +53,19 @@ const Grid = () => {
             </Tr>
         </Thead>
         <Tbody>
-
+            {users.map((item, i) => (
+                <Tr key={i}>
+                    <Td width='30%'>{item.name}</Td>
+                    <Td width='30%'>{item.email}</Td>
+                    <Td width='20%' onlyWeb>{item.phone}</Td>
+                    <Td alignCenter width='5%'>
+                        <FaEdit></FaEdit>
+                    </Td>
+                    <Td alignCenter width='5%'>
+                        <FaEdit onClick={() => handleDelete(item.id)}></FaEdit>
+                    </Td>
+                </Tr>
+            ))}
         </Tbody>
     </Table>
   )
