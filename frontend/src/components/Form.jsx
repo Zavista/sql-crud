@@ -46,19 +46,19 @@ const Form = ({ onEdit }) => {
     <FormContainer>
       <InputArea>
         <Label for="name">Name</Label>
-        <Input name="name" id="name"></Input>
+        <Input name="name" id="name" required></Input>
       </InputArea>
       <InputArea>
         <Label for="email">Email</Label>
-        <Input name="email" id="email"></Input>
+        <Input name="email" id="email" required></Input>
       </InputArea>
       <InputArea>
         <Label for="tel">Telephone</Label>
-        <Input name="tel" id="tel"></Input>
+        <Input name="tel" id="tel" required></Input>
       </InputArea>
       <InputArea>
         <Label for="birthdate">Date of Birth</Label>
-        <Input name="birthdate" id="birthdate" type='date'></Input>
+        <Input name="birthdate" id="birthdate" type='date' required></Input>
       </InputArea>
       <Button type='submit'>Add</Button>
     </FormContainer>
