@@ -50,6 +50,8 @@ const Grid = ({ users }) => {
                 <Th>Name</Th>
                 <Th>Email</Th>
                 <Th onlyWeb>Telephone</Th>
+                <Th></Th>
+                <Th></Th>
             </Tr>
         </Thead>
         <Tbody>
