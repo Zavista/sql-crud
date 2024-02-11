@@ -62,7 +62,7 @@ const Grid = ({ users }) => {
                         <FaEdit></FaEdit>
                     </Td>
                     <Td alignCenter width='5%'>
-                        <FaEdit onClick={() => handleDelete(item.id)}></FaEdit>
+                        <FaTrash onClick={() => handleDelete(item.id)}></FaTrash>
                     </Td>
                 </Tr>
             ))}
