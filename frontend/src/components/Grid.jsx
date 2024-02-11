@@ -42,7 +42,19 @@ export const Td = styled.td`
     }
 `;
 
-const Grid = ({ users }) => {
+const Grid = ({ users, setUsers }) => {
+
+    const handleDelete = async (id) => {
+        try {
+            const res = await axios.delete(`http://localho  st:5000/${id}`);
+            const newUsers = users.filter((user) => user.id !== id);
+            setUsers(newUsers);
+            toast.success(res.data);
+        } catch (error) {
+            toast.error(error.message);
+        }
+    }
+
   return (
     <Table>
         <Thead>
