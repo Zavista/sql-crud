@@ -42,7 +42,9 @@ export const Td = styled.td`
     }
 `;
 
-const Grid = ({ users, setUsers }) => {
+const Grid = ({ users, setUsers, setOnEdit }) => {
+
+    const handleEdit = (item) => setOnEdit(item);
 
     const handleDelete = async (id) => {
         try {
@@ -53,6 +55,7 @@ const Grid = ({ users, setUsers }) => {
         } catch (error) {
             toast.error(error.message);
         }
+    setOnEdit(null);
     }
 
   return (
@@ -73,7 +76,7 @@ const Grid = ({ users, setUsers }) => {
                     <Td width='30%'>{item.email}</Td>
                     <Td width='20%' onlyWeb>{item.phone}</Td>
                     <Td alignCenter width='5%'>
-                        <FaEdit></FaEdit>
+                        <FaEdit onClick={() => handleEdit(item)} />
                     </Td>
                     <Td alignCenter width='5%'>
                         <FaTrash onClick={() => handleDelete(item.id)}></FaTrash>
