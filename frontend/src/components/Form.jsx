@@ -53,8 +53,8 @@ const Form = ({ onEdit }) => {
         <Input name="email" id="email" required></Input>
       </InputArea>
       <InputArea>
-        <Label for="tel">Telephone</Label>
-        <Input name="tel" id="tel" required></Input>
+        <Label for="phone">Telephone</Label>
+        <Input name="phone" id="phone" required></Input>
       </InputArea>
       <InputArea>
         <Label for="birthdate">Date of Birth</Label>
