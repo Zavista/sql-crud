@@ -55,7 +55,7 @@ const Grid = ({ users, setUsers, setOnEdit }) => {
         } catch (error) {
             toast.error(error.message);
         }
-    setOnEdit(null);
+        setOnEdit(null);
     }
 
   return (
