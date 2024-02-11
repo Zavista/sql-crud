@@ -2,6 +2,7 @@ import './App.css'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import styled from 'styled-components';
+import Form from './components/Form';
 
 const Container = styled.div`
   width: 100%;
@@ -23,9 +24,10 @@ function App() {
   return (
     <>
       <Container>
-        Hi
+        <Title>Users</Title>
+        <Form></Form>
       </Container>
-      <ToastContainer autoClose={3000} position={toast.POSITION.BOTTEM_LEFT}></ToastContainer>
+      <ToastContainer autoClose={3000} position="bottom-left" />
     </>
       
   )
