@@ -45,18 +45,18 @@ export const Td = styled.td`
 const Grid = ({ users, setUsers, setOnEdit }) => {
 
     const handleEdit = (item) => setOnEdit(item);
-
+    
     const handleDelete = async (id) => {
         try {
-            const res = await axios.delete(`http://localhost:5000/${id}`);
-            const newUsers = users.filter((user) => user.id !== id);
-            setUsers(newUsers);
-            toast.success(res.data);
+            const response = await axios.delete(`http://localhost:5000/${id}`);
+            const newArray = users.filter((user) => user.id !== id);
+            setUsers(newArray);
+            toast.success(response.data);
         } catch (error) {
-            toast.error(error.message);
+            toast.error(error.response.data);
         }
         setOnEdit(null);
-    }
+    };
 
   return (
     <Table>
