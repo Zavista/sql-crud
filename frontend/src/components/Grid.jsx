@@ -2,7 +2,6 @@ import React from 'react'
 import styled from 'styled-components'
 import axios from 'axios'
 import { FaTrash, FaEdit } from 'react-icons/fa'
-import { toast } from 'react-toastify'
 
 const Table = styled.table`
     width: 100%;
@@ -45,15 +44,15 @@ export const Td = styled.td`
 const Grid = ({ users, setUsers, setOnEdit }) => {
 
     const handleEdit = (item) => setOnEdit(item);
-    
+
     const handleDelete = async (id) => {
         try {
             const response = await axios.delete(`http://localhost:5000/${id}`);
             const newArray = users.filter((user) => user.id !== id);
             setUsers(newArray);
-            toast.success(response.data);
+            console.log(response.data);
         } catch (error) {
-            toast.error(error.response.data);
+            console.log(error.data);
         }
         setOnEdit(null);
     };
