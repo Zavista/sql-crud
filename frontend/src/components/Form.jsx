@@ -1,6 +1,5 @@
 import React, { useRef, useEffect } from 'react'
 import styled from 'styled-components'
-import toast from 'react-toastify'
 import axios from 'axios'
 
 const FormContainer = styled.form`
@@ -47,10 +46,15 @@ const Form = ({ onEdit, getUsers, setOnEdit }) => {
   useEffect(() => {
     if (onEdit) {
       const user = ref.current;
+      user.id = onEdit.id;
       user.name.value = onEdit.name;
       user.email.value = onEdit.email;
       user.phone.value = onEdit.phone;
-      user.birthdate.value = onEdit.birthdate;
+
+      // Format the birthdate into "dd/mm/yyyy" format
+      const birthdate = new Date(onEdit.birthdate);
+      const formattedBirthdate = birthdate.toLocaleDateString('en-CA'); // 'en-GB' represents the British English locale which uses "dd/mm/yyyy" format
+      user.birthdate.value = formattedBirthdate;
     }
   }, [onEdit]);
 
@@ -65,9 +69,9 @@ const Form = ({ onEdit, getUsers, setOnEdit }) => {
               phone: user.phone.value,
               birthdate: user.birthdate.value,
           });
-          toast.success(response.data);
+            console.log(response.data);
       } catch (error) {
-          toast.error(error.response.data);
+          console.log(error.data);
       }
     } else {
         try {
@@ -77,10 +81,10 @@ const Form = ({ onEdit, getUsers, setOnEdit }) => {
               phone: user.phone.value,
               birthdate: user.birthdate.value,
           });
-          toast.success(response.data);
+            console.log(response.data);
         } catch (error) {
-          toast.error(error.response.data);
-      }
+            console.log(error.data);
+        }
     }
 
     user.name.value = "";
