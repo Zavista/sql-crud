@@ -1,5 +1,7 @@
-import React, { useRef } from 'react'
+import React, { useRef, useEffect } from 'react'
 import styled from 'styled-components'
+import toast from 'react-toastify'
+import axios from 'axios'
 
 const FormContainer = styled.form`
   display: flex;
@@ -39,11 +41,59 @@ const Button = styled.button`
 `
 
 
-const Form = ({ onEdit }) => {
+const Form = ({ onEdit, getUsers, setOnEdit }) => {
   const ref = useRef();
+
+  useEffect(() => {
+    if (onEdit) {
+      const user = ref.current;
+      user.name.value = onEdit.name;
+      user.email.value = onEdit.email;
+      user.phone.value = onEdit.phone;
+      user.birthdate.value = onEdit.birthdate;
+    }
+  }, [onEdit]);
+
+  const handleSubmit = async (e) => {
+    const user = ref.current;
+
+    if (onEdit) {
+      try {
+          const response = await axios.put(`http://localhost:5000/${user.id}`, { //UPDATE
+              name: user.name.value,
+              email: user.email.value,
+              phone: user.phone.value,
+              birthdate: user.birthdate.value,
+          });
+          toast.success(response.data);
+      } catch (error) {
+          toast.error(error.response.data);
+      }
+    } else {
+        try {
+          const response = await axios.post(`http://localhost:5000`, { //ADD
+              name: user.name.value,
+              email: user.email.value,
+              phone: user.phone.value,
+              birthdate: user.birthdate.value,
+          });
+          toast.success(response.data);
+        } catch (error) {
+          toast.error(error.response.data);
+      }
+    }
+
+    user.name.value = "";
+    user.email.value = "";
+    user.phone.value = "";
+    user.birthdate.value = "";
+
+    setOnEdit(null);
+    getUsers();
+  }
   
   return (
-    <FormContainer>
+    <FormContainer ref={ref} onSubmit={handleSubmit}>
       <InputArea>
         <Label for="name">Name</Label>
         <Input name="name" id="name" required></Input>
@@ -60,7 +110,7 @@ const Form = ({ onEdit }) => {
         <Label for="birthdate">Date of Birth</Label>
         <Input name="birthdate" id="birthdate" type='date' required></Input>
       </InputArea>
-      <Button type='submit'>Add</Button>
+      <Button type='submit'>Submit</Button>
     </FormContainer>
   )
 }
